@@ -32,7 +32,8 @@ export default function Login() {
             <button>Sign In</button>
 
             <p>
-              Don't have an account?  <Link to="/signup"> Create account</Link></p>
+              Don't have an account? <Link to="/signup"> Create account</Link>
+            </p>
           </div>
         </form>
       </div>

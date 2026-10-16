@@ -1,9 +1,6 @@
-import Nav_header from "./Nav_header";
-
 export default function Welcome() {
   return (
     <div className="complete-profile">
-      <Nav_header />
       <div className="welcome-section">
         <div className="welcome-details">
           <span className="wave">

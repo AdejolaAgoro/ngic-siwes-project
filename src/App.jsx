@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import AppLayout from "./layouts/app-layout";
-import Login from "./components/auth/Login";
-import Signup from "./components/auth/Signup";
+import Login from "./components/auth/login";
+import Signup from "./components/auth/signup";
 
 export default function App() {
   return (

@@ -4,11 +4,7 @@ export default function Header() {
       <header>
         {/* Header-logo */}
         <div className="logo">
-          <img
-            className="logo-image"
-            src="/src/assets/Arda_Sponsor_Logos_Diamond_NNPC_Update.png"
-            alt=""
-          />
+          <img className="logo-image" src="/icons/nnpc.png" alt="nnpc logo" />
           <span>Intern</span>
         </div>
         {/* header list */}

@@ -1,12 +1,8 @@
-// import Nav_header from "./Nav_header";
-
 import { Link } from "react-router-dom";
-import Nav_header from "./Nav_header";
 
 export default function Login() {
   return (
     <div className="first-page">
-      <Nav_header />
       <div className="main-section  ">
         {/* Sign In form */}
         <form>
@@ -36,7 +32,8 @@ export default function Login() {
             <button>Sign In</button>
 
             <p>
-              Don't have an account?  <Link to="/signup"> Create account</Link></p>
+              Don't have an account? <Link to="/signup"> Create account</Link>
+            </p>
           </div>
         </form>
       </div>

@@ -1,7 +1,3 @@
-
-
-export default function Apply_page() {
-  return (
-    <div>Apply-page</div>
-  )
+export default function ApplyPage() {
+  return <div>Apply-page</div>;
 }

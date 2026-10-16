@@ -1,12 +1,8 @@
-// import Nav_header from "./Nav_header";
-
 import { Link } from "react-router-dom";
-import Nav_header from "./Nav_header";
 
 export default function Login() {
   return (
     <div className="first-page">
-      <Nav_header />
       <div className="main-section  ">
         {/* Sign In form */}
         <form>

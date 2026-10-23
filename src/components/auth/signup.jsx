@@ -4,7 +4,7 @@ export default function Signup() {
   return (
     <div className="signup">
       <div className="main-section">
-        <form>
+        <form className="login">
           <div className="login-descript">
             <h2>Register as an Intern</h2>
             <p>Create an account to apply for an internship at NGIC</p>

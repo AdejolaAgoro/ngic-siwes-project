@@ -5,7 +5,7 @@ export default function Login() {
     <div className="first-page">
       <div className="main-section  ">
         {/* Sign In form */}
-        <form>
+        <form className="login">
           {/* Sign up flex */}
           <div className="login-descript">
             <h2>Welcome back</h2>

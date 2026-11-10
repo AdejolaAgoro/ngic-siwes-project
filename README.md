@@ -1,16 +1,34 @@
-# React + Vite
+# NGIC Internship Portal
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React internship portal with Supabase authentication, profiles, application uploads, and admin review.
 
-Currently, two official plugins are available:
+## Configure and run
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+1. Copy `.env.example` to `.env.local`.
+2. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` from the same Supabase project under **Project Settings → API**.
+3. Install dependencies with `npm install` and run `npm run dev`.
 
-## React Compiler
+The browser uses only the Supabase publishable key. Never put a service-role or secret key in a `VITE_` variable.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Database setup
 
-## Expanding the ESLint configuration
+Install Docker Desktop and the Supabase CLI, then run:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```sh
+npx supabase start
+npx supabase db reset
+```
+
+For a hosted project, link the CLI to that project, review the SQL files in `supabase/migrations`, and apply them with `npx supabase db push`. These migrations create Auth-linked profiles, application records, role-aware row-level security, and the private document bucket.
+
+## User flow
+
+New users sign up, confirm email when confirmation is enabled, complete their profile, and submit one application. Returning users who already have an application go directly to its current status after sign-in. Admin access requires a trusted database role change; for example, run the following in the Supabase SQL Editor after confirming the email:
+
+```sql
+update public.profiles
+set role = 'admin'
+where email = 'admin@example.com';
+```
+
+Applicants can read only their own application and documents. Admins can review all applications and open private documents through short-lived signed links.

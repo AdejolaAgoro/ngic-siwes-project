@@ -1,9 +1,15 @@
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/auth-state";
+
 export default function Welcome() {
+  const navigate = useNavigate();
+  const { user, profile } = useAuth();
+  const name = profile?.full_name || user?.user_metadata?.full_name || "Intern";
   return (
     <div className="second-section">
       <div className="welcome-section">
         <h2>
-          Welcome Asake{" "}
+          Welcome {name}{" "}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="30"
@@ -22,7 +28,7 @@ export default function Welcome() {
           </svg>{" "}
         </h2>
         <p>Complete your profile to apply for an internship</p>
-        <button>Complete Profile</button>
+        <button onClick={() => navigate("/profile/image")}>Complete Profile</button>
       </div>
     </div>
   );

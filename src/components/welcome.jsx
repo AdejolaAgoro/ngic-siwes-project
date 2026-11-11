@@ -28,7 +28,9 @@ export default function Welcome() {
           </svg>{" "}
         </h2>
         <p>Complete your profile to apply for an internship</p>
-        <button onClick={() => navigate("/profile/image")}>Complete Profile</button>
+        <button onClick={() => navigate("/profile/image")}>
+          Complete Profile
+        </button>
       </div>
     </div>
   );

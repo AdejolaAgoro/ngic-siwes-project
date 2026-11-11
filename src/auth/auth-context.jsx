@@ -4,7 +4,10 @@ import { supabase } from "../utils/supabase";
 
 export function AuthProvider({ children }) {
   const [session, setSession] = useState(null);
-  const [profileResult, setProfileResult] = useState({ userId: null, profile: null });
+  const [profileResult, setProfileResult] = useState({
+    userId: null,
+    profile: null,
+  });
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
@@ -15,7 +18,9 @@ export function AuthProvider({ children }) {
       setSession(data?.session ?? null);
       setAuthLoading(false);
     });
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, nextSession) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, nextSession) => {
       setSession(nextSession);
       if (!nextSession) setProfileResult({ userId: null, profile: null });
       setAuthLoading(false);
@@ -29,16 +34,28 @@ export function AuthProvider({ children }) {
   const userId = session?.user?.id;
   useEffect(() => {
     let active = true;
-    if (!userId) return () => { active = false; };
-    supabase.from("profiles").select("*").eq("id", userId).maybeSingle().then(({ data, error }) => {
-      if (!active) return;
-      if (error) console.error("Could not load profile:", error.message);
-      setProfileResult({ userId, profile: data ?? null });
-    });
-    return () => { active = false; };
+    if (!userId)
+      return () => {
+        active = false;
+      };
+    supabase
+      .from("profiles")
+      .select("*")
+      .eq("id", userId)
+      .maybeSingle()
+      .then(({ data, error }) => {
+        if (!active) return;
+        if (error) console.error("Could not load profile:", error.message);
+        setProfileResult({ userId, profile: data ?? null });
+      });
+    return () => {
+      active = false;
+    };
   }, [userId]);
 
-  const profileMatchesSession = Boolean(userId && profileResult.userId === userId);
+  const profileMatchesSession = Boolean(
+    userId && profileResult.userId === userId,
+  );
   const profile = profileMatchesSession ? profileResult.profile : null;
   const profileLoading = Boolean(userId && !profileMatchesSession);
 
@@ -50,7 +67,11 @@ export function AuthProvider({ children }) {
     profileLoading,
     refreshProfile: async () => {
       if (!userId) return null;
-      const { data, error } = await supabase.from("profiles").select("*").eq("id", userId).single();
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", userId)
+        .single();
       if (error) throw error;
       setProfileResult({ userId, profile: data });
       return data;
